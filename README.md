@@ -80,7 +80,7 @@ cd finthos-dashboard
 open index.html
 ```
 
-**Live demo →** [dhruvinbarot.github.io/finthos_demo](#)
+**Live demo →** [dhruvinbarot.github.io/finthos_demo.git](#)
 
 ---
 
