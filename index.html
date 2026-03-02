@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Finthos — Wealth Intelligence</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="s-logo">
+      <div class="s-logo-text"><span>Finthos</span></div>
+      <div class="s-logo-sub">Wealth Intelligence</div>
+    </div>
+    <div class="s-client">
+      <div class="s-avatar">AK</div>
+      <div>
+        <div class="s-cname">Al-Karimi Family</div>
+        <div class="s-ctag">Ultra HNW · Private</div>
+      </div>
+    </div>
+    <div class="s-nav">
+      <span class="nav-lbl">Overview</span>
+      <div class="nav-item active"><span class="nav-ico">⬡</span>Dashboard</div>
+      <div class="nav-item"><span class="nav-ico">📊</span>Portfolio<span class="nav-badge">Live</span></div>
+      <div class="nav-item"><span class="nav-ico">🎯</span>Goals</div>
+      <div class="nav-item" onclick="toggleChat()"><span class="nav-ico">💬</span>AI Advisor</div>
+      <span class="nav-lbl">Accounts</span>
+      <div class="nav-item"><span class="nav-ico">🏦</span>Accounts</div>
+      <div class="nav-item"><span class="nav-ico">📑</span>Reports</div>
+      <div class="nav-item"><span class="nav-ico">⚙️</span>Settings</div>
+    </div>
+    <div class="s-bottom">
+      <div class="s-status"><div class="s-dot"></div>All accounts synced · 2m ago</div>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <span class="tb-title">Dashboard</span>
+        <span class="tb-date">· Mon, March 2 2026</span>
+      </div>
+      <div class="tb-space"></div>
+      <div style="display:flex;gap:6px;">
+        <div class="tb-chip active">1M</div>
+        <div class="tb-chip">3M</div>
+        <div class="tb-chip">YTD</div>
+        <div class="tb-chip">1Y</div>
+        <div class="tb-chip">All</div>
+      </div>
+      <div style="width:1px;height:20px;background:var(--border2);margin:0 4px;"></div>
+      <div class="tb-notif">🔔</div>
+      <div class="tb-notif" onclick="toggleChat()" title="AI Advisor">✦</div>
+    </div>
+
+    <div class="content">
+
+      <!-- Net Worth Hero -->
+      <div class="nw-hero">
+        <div class="nw-label">Total Net Worth</div>
+        <div class="nw-amount"><sup>$</sup>24,871,430</div>
+        <div class="nw-change">
+          <span class="nw-badge up">▲ +3.42%</span>
+          <span style="font-size:.72rem;color:var(--muted);">+$822,400 this month</span>
+        </div>
+        <div class="nw-stats">
+          <div><div class="nw-stat-val">$18.2M</div><div class="nw-stat-lbl">Investable Assets</div><div class="nw-stat-chg up">▲ +4.1%</div></div>
+          <div><div class="nw-stat-val">$4.6M</div><div class="nw-stat-lbl">Real Estate</div><div class="nw-stat-chg up">▲ +1.2%</div></div>
+          <div><div class="nw-stat-val">$1.9M</div><div class="nw-stat-lbl">Private Equity</div><div class="nw-stat-chg dn">▼ −0.3%</div></div>
+          <div><div class="nw-stat-val">$180K</div><div class="nw-stat-lbl">Cash & Equiv.</div><div class="nw-stat-chg up">▲ +0.8%</div></div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <!-- Performance Chart -->
+        <div class="card">
+          <div class="perf-header">
+            <div>
+              <div class="card-title" style="margin-bottom:4px;">Portfolio Performance</div>
+              <div class="perf-val">$18,241,000</div>
+              <div class="perf-chg">▲ +$714,200 · +4.08% this month</div>
+            </div>
+            <div class="perf-tabs">
+              <div class="perf-tab active">1M</div>
+              <div class="perf-tab">3M</div>
+              <div class="perf-tab">1Y</div>
+            </div>
+          </div>
+          <div class="chart-wrap"><canvas id="perfChart"></canvas></div>
+        </div>
+
+        <!-- Allocation -->
+        <div class="card">
+          <div class="card-title">Allocation <span class="card-title-action">Rebalance →</span></div>
+          <div class="alloc-wrap">
+            <div class="alloc-chart">
+              <canvas id="allocChart"></canvas>
+              <div class="alloc-center">
+                <div class="alloc-center-val">$24.8M</div>
+                <div class="alloc-center-lbl">Total</div>
+              </div>
+            </div>
+            <div class="alloc-legend">
+              <div class="alloc-row"><div class="alloc-dot" style="background:#4f7cff"></div><span class="alloc-name">Equities</span><span class="alloc-pct">42%</span><span class="alloc-val">$10.4M</span></div>
+              <div class="alloc-row"><div class="alloc-dot" style="background:#22d3a0"></div><span class="alloc-name">Real Estate</span><span class="alloc-pct">18%</span><span class="alloc-val">$4.6M</span></div>
+              <div class="alloc-row"><div class="alloc-dot" style="background:#f0b429"></div><span class="alloc-name">Fixed Income</span><span class="alloc-pct">16%</span><span class="alloc-val">$3.9M</span></div>
+              <div class="alloc-row"><div class="alloc-dot" style="background:#a78bfa"></div><span class="alloc-name">Private Equity</span><span class="alloc-pct">8%</span><span class="alloc-val">$1.9M</span></div>
+              <div class="alloc-row"><div class="alloc-dot" style="background:#f05252"></div><span class="alloc-name">Crypto</span><span class="alloc-pct">8%</span><span class="alloc-val">$2.0M</span></div>
+              <div class="alloc-row"><div class="alloc-dot" style="background:#38bdf8"></div><span class="alloc-name">Cash</span><span class="alloc-pct">8%</span><span class="alloc-val">$1.8M</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Insight -->
+      <div class="ai-card">
+        <div class="ai-icon">✦</div>
+        <div style="flex:1;">
+          <div class="ai-title">Finthos AI <span class="ai-badge">INSIGHT</span></div>
+          <div class="ai-text">Your equity allocation is 4% above your target threshold. Given current Fed rate expectations and elevated volatility in tech holdings, consider rotating $980K into short-duration fixed income to reduce duration risk before Q2. Your crypto exposure has also outperformed — a partial rebalance could lock in gains.</div>
+          <div class="ai-actions">
+            <div class="ai-btn primary" onclick="toggleChat()">Ask AI Advisor</div>
+            <div class="ai-btn">View Analysis</div>
+            <div class="ai-btn">Dismiss</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <!-- Top Holdings -->
+        <div class="card">
+          <div class="card-title">Top Holdings <span class="card-title-action">View all →</span></div>
+          <div class="holding-row">
+            <div class="h-ico" style="background:rgba(79,124,255,.12)">🍎</div>
+            <div class="h-name"><div class="h-ticker">AAPL</div><div class="h-full">Apple Inc.</div></div>
+            <div style="margin-right:12px"><div class="h-bar-wrap"><div class="h-bar" style="width:82%;background:#4f7cff"></div></div></div>
+            <div class="h-right"><div class="h-val">$2,140,000</div><div class="h-chg up">▲ +2.4%</div></div>
+          </div>
+          <div class="holding-row">
+            <div class="h-ico" style="background:rgba(34,211,160,.1)">₿</div>
+            <div class="h-name"><div class="h-ticker">BTC</div><div class="h-full">Bitcoin</div></div>
+            <div style="margin-right:12px"><div class="h-bar-wrap"><div class="h-bar" style="width:64%;background:#22d3a0"></div></div></div>
+            <div class="h-right"><div class="h-val">$1,580,000</div><div class="h-chg up">▲ +6.1%</div></div>
+          </div>
+          <div class="holding-row">
+            <div class="h-ico" style="background:rgba(240,180,41,.1)">🏢</div>
+            <div class="h-name"><div class="h-ticker">RE-01</div><div class="h-full">Dubai Marina Unit</div></div>
+            <div style="margin-right:12px"><div class="h-bar-wrap"><div class="h-bar" style="width:55%;background:#f0b429"></div></div></div>
+            <div class="h-right"><div class="h-val">$1,350,000</div><div class="h-chg up">▲ +1.1%</div></div>
+          </div>
+          <div class="holding-row">
+            <div class="h-ico" style="background:rgba(167,139,250,.1)">🔮</div>
+            <div class="h-name"><div class="h-ticker">NVDA</div><div class="h-full">NVIDIA Corp.</div></div>
+            <div style="margin-right:12px"><div class="h-bar-wrap"><div class="h-bar" style="width:48%;background:#a78bfa"></div></div></div>
+            <div class="h-right"><div class="h-val">$1,180,000</div><div class="h-chg dn">▼ −1.8%</div></div>
+          </div>
+          <div class="holding-row">
+            <div class="h-ico" style="background:rgba(56,189,248,.1)">📦</div>
+            <div class="h-name"><div class="h-ticker">AMZN</div><div class="h-full">Amazon.com</div></div>
+            <div style="margin-right:12px"><div class="h-bar-wrap"><div class="h-bar" style="width:40%;background:#38bdf8"></div></div></div>
+            <div class="h-right"><div class="h-val">$980,000</div><div class="h-chg up">▲ +0.9%</div></div>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card">
+          <div class="card-title">Recent Activity <span class="card-title-action">View all →</span></div>
+          <div class="tx-row"><div class="tx-ico">📈</div><div class="tx-desc"><div class="tx-name">Bought AAPL × 120</div><div class="tx-date">Today · 09:42 AM · Schwab</div></div><div class="tx-amt dn">−$228,600</div></div>
+          <div class="tx-row"><div class="tx-ico">💰</div><div class="tx-desc"><div class="tx-name">Dividend — VTI</div><div class="tx-date">Mar 1 · Vanguard</div></div><div class="tx-amt up">+$14,200</div></div>
+          <div class="tx-row"><div class="tx-ico">₿</div><div class="tx-desc"><div class="tx-name">Sold 0.5 BTC</div><div class="tx-date">Feb 28 · Coinbase</div></div><div class="tx-amt up">+$48,550</div></div>
+          <div class="tx-row"><div class="tx-ico">🏢</div><div class="tx-desc"><div class="tx-name">Wire — Dubai Property</div><div class="tx-date">Feb 26 · HSBC Private</div></div><div class="tx-amt dn">−$450,000</div></div>
+          <div class="tx-row"><div class="tx-ico">📊</div><div class="tx-desc"><div class="tx-name">Rebalance — Bonds</div><div class="tx-date">Feb 24 · Fidelity</div></div><div class="tx-amt dn">−$120,000</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AI Chat FAB -->
+  <button class="chat-fab" onclick="toggleChat()">
+    ✦
+    <div class="notif-dot"></div>
+  </button>
+
+  <!-- AI Chat Panel -->
+  <div class="chat-panel" id="chatPanel">
+    <div class="cp-header">
+      <div class="cp-avatar">✦</div>
+      <div>
+        <div class="cp-name">Finthos AI Advisor</div>
+        <div class="cp-sub">Online · Analyzing your portfolio</div>
+      </div>
+      <button class="cp-close" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="cp-context">
+      <div class="ctx-chip" onclick="quickAsk('Should I rebalance my portfolio?')">Rebalance?</div>
+      <div class="ctx-chip" onclick="quickAsk('How is my crypto performing?')">Crypto outlook</div>
+      <div class="ctx-chip" onclick="quickAsk('Am I on track for my retirement goal?')">Retirement</div>
+      <div class="ctx-chip" onclick="quickAsk('What are my biggest risks right now?')">Risk analysis</div>
+    </div>
+    <div class="cp-messages" id="chatMessages">
+      <div class="msg ai">
+        <div class="msg-bubble">Hello! I'm your Finthos AI Advisor. I have full context on the Al-Karimi family portfolio — $24.8M across equities, real estate, private equity, and crypto. What would you like to explore today?</div>
+        <div class="msg-time">Just now</div>
+      </div>
+    </div>
+    <div class="cp-input-area">
+      <textarea class="cp-input" id="chatInput" placeholder="Ask about your portfolio…" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+      <button class="cp-send" id="sendBtn" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
